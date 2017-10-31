@@ -3,7 +3,7 @@ var app = angular.module('BTAPP', ['ui.bootstrap', 'ui.router', 'ngCookies', 'oc
 app.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider',
     function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
-        $urlRouterProvider.otherwise('/dashboard');
+        $urlRouterProvider.otherwise('/login');
 
         $stateProvider
             .state('dashboard', {
@@ -20,7 +20,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider',
                                     'ng/controller/dashboardCtrl.js',
                                     'ng/directives/dashboard/header/header.js',
                                     'ng/directives/dashboard/sidebar/sidebar.js',
-
 
                                 ]
                             });
@@ -48,7 +47,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider',
               }).state('login', {
                 url: '/login',
                 templateUrl: 'ng/directives/login/login.html',
-                controller: 'userCtrl',
+                controller: 'loginCtrl',
                 resolve: {
                     loadMyDirectives: function ($ocLazyLoad) {
                         return $ocLazyLoad.load(
@@ -56,27 +55,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider',
                                 name: 'BTAPP',
                                 files: [
                                    
-                                    'ng/controller/userCtrl.js',
-                                    
-
+                                    'ng/controller/loginCtrl.js',
 
                                 ]
                             });
                     }
                 }
               });
-
-
-
-
-
-
-
-
-
-
-
-
 
     }]);
 
