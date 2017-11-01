@@ -82,8 +82,8 @@ app.controller('userregCtrl', function ($scope, $location, toaster, $http) {
                 timeout: 3000
             });
 
-        }).error(function () {
-            console.log("error");
+        }, function (err) {
+
         });
 
     };
