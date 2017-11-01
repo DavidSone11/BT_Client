@@ -1,4 +1,12 @@
-var app = angular.module('BTAPP', ['ui.bootstrap', 'ui.router', 'ngCookies', 'oc.lazyLoad']);
+var app = angular.module('BTAPP', [
+    'ui.bootstrap',
+    'ui.router',
+    'ngCookies',
+    'oc.lazyLoad',
+    'toaster',
+    'ngAnimate'
+
+]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider',
     function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
@@ -35,16 +43,16 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider',
                             {
                                 name: 'BTAPP',
                                 files: [
-                                   
+
                                     'ng/controller/userCtrl.js',
-                                    
+
 
 
                                 ]
                             });
                     }
                 }
-              }).state('login', {
+            }).state('login', {
                 url: '/login',
                 templateUrl: 'ng/directives/login/login.html',
                 controller: 'loginCtrl',
@@ -54,14 +62,31 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider',
                             {
                                 name: 'BTAPP',
                                 files: [
-                                   
+
                                     'ng/controller/loginCtrl.js',
 
                                 ]
                             });
                     }
                 }
-              });
+            }).state('userreg', {
+                url: '/userreg',
+                templateUrl: 'ng/directives/userregistration/userreg.html',
+                controller: 'userregCtrl',
+                resolve: {
+                    loadMyDirectives: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load(
+                            {
+                                name: 'BTAPP',
+                                files: [
+
+                                    'ng/controller/userregCtrl.js',
+
+                                ]
+                            });
+                    }
+                }
+            });;
 
     }]);
 
