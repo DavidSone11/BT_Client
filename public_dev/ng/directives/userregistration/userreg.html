@@ -1,50 +1,150 @@
-<div class="form">
-    <form id="contactform">
-        <p class="contact">
-            <label for="name">Name</label>
-        </p>
-        <input id="name" name="name" placeholder="First and last name" required="" tabindex="1" type="text">
+<div class="row">
+    <div class="col-lg-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">REGISTRATION
 
-        <p class="contact">
-            <label for="email">Email</label>
-        </p>
-        <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
+            </div>
+            <div class="panel-body">
+                <div class="form">
+                    <form id="contactform">
+                        <p class="contact">
+                            <label for="name">Name</label>
+                        </p>
+                        <input id="name" name="name" ng-model="userRegister.name" placeholder="First and last name" required="" tabindex="1" type="text">
 
-        <p class="contact">
-            <label for="username">Create a username</label>
-        </p>
-        <input id="username" name="username" placeholder="username" required="" tabindex="2" type="text">
+                        <p class="contact">
+                            <label for="email">Email</label>
+                        </p>
+                        <input id="email" name="email" ng-model="userRegister.email" placeholder="example@domain.com" required="" type="email">
 
-        <p class="contact">
-            <label for="password">Create a password</label>
-        </p>
-        <input type="password" id="password" name="password" required="" type="text">
-        <p class="contact">
-            <label for="repassword">Confirm your password</label>
-        </p>
-        <input type="password" id="password" name="password" required="" type="text">
+                        <p class="contact">
+                            <label for="username">Create a username</label>
+                        </p>
+                        <input id="username" name="username" ng-model="userRegister.username" placeholder="username" required="" tabindex="2" type="text">
 
-        <p class="role">
-            <label for="password">Select Role</label>
-        </p>
-        <select class="form-control" ng-model="selectedrole" ng-required="true" name="role" ng-options="role.name for role in roles">
-            <option value="" selected>--Select Role--</option>
-        </select>
-        <br>
-        <p class="gender">
-            <label for="password">Select Gender</label>
-        </p>
-        <select class="form-control" ng-model="selectedgender" ng-required="true" name="gender" ng-options="gender.name for gender in genders">
-            <option value="" selected>--Select Gender--</option>
-        </select>
-        <br>
-        <br>
+                        <p class="contact">
+                            <label for="password">Create a password</label>
+                        </p>
+                        <input type="password" id="password" ng-model="userRegister.password" name="password" required="" type="text">
+                        <p class="contact">
+                            <label for="repassword">Confirm your password</label>
+                        </p>
+                        <input type="password" id="password" ng-model="userRegister.confirmPassword" name="password" required="" type="text">
 
-        <p class="contact">
-            <label for="phone">Mobile phone</label>
-        </p>
-        <input id="phone" name="phone" placeholder="phone number" required="" type="text">
-        <br>
-        <input class="buttom" name="submit" id="submit" tabindex="5" value="Sign me up!" type="submit">
-    </form>
+                        <p class="role">
+                            <label for="password">Select Role</label>
+                        </p>
+                        <select class="form-control" ng-model="userRegister.selectedRole" ng-required="true" name="role" ng-options="role.name for role in roles">
+                            <option value="" selected>--Select Role--</option>
+                        </select>
+                        <br>
+                        <p class="gender">
+                            <label for="password">Select Gender</label>
+                        </p>
+                        <select class="form-control" ng-model="userRegister.selectedGender" ng-required="true" name="gender" ng-options="gender.name for gender in genders">
+                            <option value="" selected>--Select Gender--</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <p class="contact">
+                            <label for="phone">Mobile Number</label>
+                        </p>
+                        <input id="phone" name="phone" ng-model="userRegister.mobileNumber" placeholder="phone number" required="" type="text">
+                        <br>
+                        <input class="buttom" name="submit" id="submit" ng-click="registerUser()" tabindex="5" value="Sign me up!" type="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                List Of Users
+               
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Name</th>
+                            <th>User Name</th>
+                            <th>confirmPassword</th>
+                            <th>Password</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>
+                                <input type="text" class="form-control input-sm" placeholder="User Name" />
+                            </th>
+
+                            <th>
+                                <input type="text" class="form-control input-sm" placeholder="First Name" />
+                            </th>
+
+                            <th>
+                                <input type="text" class="form-control input-sm" placeholder="Last Name" />
+                            </th>
+
+                            <th>
+                                <input type="text" class="form-control input-sm" placeholder="Email" />
+                            </th>
+
+                            <th>
+                                <input type="text" class="form-control input-sm" placeholder="password" />
+                            </th>
+
+                            <th>
+                                <input type="text" class="form-control input-sm" placeholder="Role" />
+                            </th>
+
+
+
+
+                            <th>&nbsp;</th>
+
+                        </tr>
+                    </thead>
+                    <tbody ng-show="true">
+                        <tr ng-repeat="(key,user) in users">
+                            <td>{{$index+1}}
+                            </td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.confirmPassword}}</td>
+                            <td>{{user.password}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.selectedGender}}</td>
+                            
+                            <td>{{user.selectedRole}}</td>
+                            <td>
+                                <button class="btn btn-xs btn-warning fa fa-edit" ng-click="selectUser(user)" title="Edit">
+                                </button>
+                                <button class="btn btn-xs btn-danger fa fa-remove" ng-click="removeUser(user)"
+                                    title="remove"> </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-show="isLoading">
+                        <tr style="height:200px">
+                            <td colspan="9" class="text-center">
+                                <i class="fa fa-spinner fa-4x fa-pulse"> </i> Loading Users...</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <toaster-container toaster-options="{'time-out': 1000,'showCloseButton':true, 'animation-class': 'toast-top-left','position-class': 'toast-top-full-width'}"></toaster-container>
 </div>
