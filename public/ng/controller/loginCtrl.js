@@ -47,7 +47,6 @@ app.controller('loginCtrl', function ($scope, $location, toaster) {
     };
 
     $scope.checkUser = function () {
-
         if ($scope.username == "" || typeof ($scope.username) == 'undefined') {
             $scope.isUserFieldError = true;
             $scope.isPasswordFieldError = false;

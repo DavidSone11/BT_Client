@@ -78,3 +78,6 @@
  .fa-asterisk{
     font-size: 10px!important;
   }
+  .errorMsg{
+    display: inline-block;
+  }

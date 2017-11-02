@@ -6,30 +6,64 @@
             </div>
             <div class="panel-body">
                 <div class="form">
-                    <form id="contactform">
+                    <form id="contactform" name="contactform">
                         <p class="contact">
                             <label for="name">Name</label>
                         </p>
-                        <input id="name" name="name" ng-model="userRegister.name" placeholder="First and last name" required="" tabindex="1" type="text">
+                        <input id="name" name="name" ng-model="userRegister.name" placeholder="First and last name" ng-minlength="6" ng-maxlength="20"
+                            ng-class="{error:isUserFieldError,success : !isUserFieldError}" ng-blur="checkUser()" required=""
+                            tabindex="1" type="text">
+                        <span style="color: red" ng-show="isUserFieldError">
+                            <span class="errorMsg" ng-show="contactform.name.$error.required">
+                                <i class="fa fa-asterisk" aria-hidden="true"></i>Username is required.
+                            </span>
+                        </span>
 
                         <p class="contact">
                             <label for="email">Email</label>
                         </p>
-                        <input id="email" name="email" ng-model="userRegister.email" placeholder="example@domain.com" required="" type="email">
+                        <input id="email" name="email" ng-model="userRegister.email" ng-class="{error:isEmailFieldError,success : !isEmailFieldError}"
+                            ng-blur="checkUser()" placeholder="example@domain.com" required="" type="email">
+                        <span style="color: red" ng-show="isEmailFieldError">
+                            <span class="errorMsg" ng-show="contactform.email.$error.required">
+                                <i class="fa fa-asterisk" aria-hidden="true"></i>Email is required.
+                            </span>
+                        </span>
 
                         <p class="contact">
                             <label for="username">Create a username</label>
                         </p>
-                        <input id="username" name="username" ng-model="userRegister.username" placeholder="username" required="" tabindex="2" type="text">
+                        <input id="username" name="username" ng-model="userRegister.username" ng-minlength="6" ng-maxlength="20" ng-class="{error:isCreateUserFieldError,success : !isCreateUserFieldError}"
+                            ng-blur="checkUser()" placeholder="username" required="" tabindex="2" type="text">
+                        <span style="color: red" ng-show="isCreateUserFieldError">
+                            <span class="errorMsg" ng-show="contactform.username.$error.required">
+                                <i class="fa fa-asterisk" aria-hidden="true"></i>Username is required.
+                            </span>
+                        </span>
 
                         <p class="contact">
                             <label for="password">Create a password</label>
                         </p>
-                        <input type="password" id="password" ng-model="userRegister.password" name="password" required="" type="text">
+                        <input type="password" id="password" ng-model="userRegister.password" name="password" ng-minlength="6" ng-maxlength="20"
+                            ng-class="{error:isPasswordFieldError,success : !isPasswordFieldError}" ng-blur="checkUser()" required=""
+                            type="text">
+                        <span style="color: red" ng-show="isPasswordFieldError">
+                            <span class="errorMsg" ng-show="contactform.password.$error.required">
+                                <i class="fa fa-asterisk" aria-hidden="true"></i>Password is required.
+                            </span>
+                        </span>
+
                         <p class="contact">
                             <label for="repassword">Confirm your password</label>
                         </p>
-                        <input type="password" id="password" ng-model="userRegister.confirmPassword" name="password" required="" type="text">
+                        <input type="password" id="password" ng-model="userRegister.confirmPassword" name="confirmPassword" ng-minlength="6" ng-maxlength="20"
+                            ng-class="{error:isConfirmPasswordFieldError,success : !isConfirmPasswordFieldError}" ng-blur="checkUser()"
+                            required="" type="text">
+                        <span style="color: red" ng-show="isConfirmPasswordFieldError">
+                            <span class="errorMsg" ng-show="contactform.confirmPassword.$error.required">
+                                <i class="fa fa-asterisk" aria-hidden="true"></i>Confirm Password is required.
+                            </span>
+                        </span>
 
                         <p class="role">
                             <label for="password">Select Role</label>
@@ -50,9 +84,16 @@
                         <p class="contact">
                             <label for="phone">Mobile Number</label>
                         </p>
-                        <input id="phone" name="phone" ng-model="userRegister.mobileNumber" placeholder="phone number" required="" type="text">
+                        <input id="phone" name="phone" ng-model="userRegister.mobileNumber" ng-minlength="10" ng-maxlength="10" ng-class="{error:isMobileFieldError,success : !isMobileFieldError}"
+                            ng-blur="checkUser()" placeholder="phone number" required="" type="text">
+                        <span style="color: red" ng-show="isMobileFieldError">
+                            <span class="errorMsg" ng-show="contactform.phone.$error.required">
+                                <i class="fa fa-asterisk" aria-hidden="true"></i>Mobile Number is required.
+                            </span>
+                        </span>
                         <br>
-                        <input class="buttom" name="submit" id="submit" ng-click="registerUser()" tabindex="5" value="Sign me up!" type="submit">
+                        <button type="button" class="buttom" name="submit" id="submit" ng-click="registerUser()" ng-disabled="contactform.$invalid" tabindex="5" value="Sign me up!" type="submit">Sign me up!</button>
+                        <br>
                     </form>
                 </div>
             </div>
@@ -66,7 +107,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 List Of Users
-               
+
             </div>
             <div class="panel-body">
                 <table class="table table-striped table-hover table-condensed">
@@ -125,13 +166,12 @@
                             <td>{{user.password}}</td>
                             <td>{{user.email}}</td>
                             <td>{{user.selectedGender}}</td>
-                            
+
                             <td>{{user.selectedRole}}</td>
                             <td>
                                 <button class="btn btn-xs btn-warning fa fa-edit" ng-click="selectUser(user)" title="Edit">
                                 </button>
-                                <button class="btn btn-xs btn-danger fa fa-remove" ng-click="removeUser(user)"
-                                    title="remove"> </button>
+                                <button class="btn btn-xs btn-danger fa fa-remove" ng-click="removeUser(user)" title="remove"> </button>
                             </td>
                         </tr>
                     </tbody>
